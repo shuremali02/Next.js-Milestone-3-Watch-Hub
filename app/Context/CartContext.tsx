@@ -2,18 +2,10 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { Watch } from "../_lib/data";
 
-
 interface Item extends Watch {
     quantity: number;
 }
-// const myObj :Item={
-//     quantity: 0,
-//     id: 0,
-//     name: "",
-//     price: 0,
-//     description: "",
-//     image: ""
-// }
+
 interface CartContextType {
     cart: Item[];
     addToCart: (product: Item) => void;
@@ -23,6 +15,7 @@ interface CartContextType {
     decrementQuantity: (id: number) => void;
     totalPrice: number;
 }
+
 interface CartProviderProps {
     children: ReactNode;
 }
@@ -31,9 +24,11 @@ const cartContext = createContext<CartContextType | null>(null);
 
 function CartProviders({ children }: CartProviderProps) {
     const [cart, setCart] = useState<Item[]>([]);
-    const [totalAmount, setTotalAmount] = useState<number>(0);
-    console.log(totalAmount)
+    const [totalAmount, setTotalAmount] = useState(0);
 
+
+
+    // Load cart from localStorage
     useEffect(() => {
         const storedCart = localStorage.getItem("cart");
         if (storedCart) {
@@ -41,6 +36,7 @@ function CartProviders({ children }: CartProviderProps) {
         }
     }, []);
 
+    // Save cart to localStorage whenever it changes
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
@@ -48,24 +44,14 @@ function CartProviders({ children }: CartProviderProps) {
     const totalPrice = cart.reduce(
         (total, item) => total + item.price * item.quantity,
         0
-    );
+    ); 
+   
 
-    // const addToCart= (product: Item) => {
-    //     console.log("Adding To Cart:", product);
-    //     setCart((prevItem) => {
+   
 
-    //         const existingItem = prevItem?.find((item) => item.id === product.id);
-    //         if (existingItem) {
-    //             return prevItem.map((item) => item.id === product.id
-    //                 ? { ...item, quantity: item.quantity + 1 } : item
-    //             );
-    //         }
 
-    //             return [...prevItem, { ...product, quantity+1];
-
-    // });}
     const addToCart = (product: Item) => {
-        console.log("Adding To Cart:", product);
+        console.log("Adding to cart:", product);
         setCart((prevItem) => {
             const existingItem = prevItem.find((item) => item.id === product.id);
             if (existingItem) {
@@ -75,17 +61,17 @@ function CartProviders({ children }: CartProviderProps) {
                         : item
                 );
             }
-
-            return [...prevItem, { ...product, quantity: 1 }];
+            console.log("Adding new product to cart:", product.name);
+            return [...prevItem, { ...product, quantity: product.quantity || 1 }];
         });
+        console.log("Updated cart:", cart);
     };
+
+
     const removeOneFromCart = (id: number) => {
         setCart((prevItem) => {
-            // const existingItem = prevItem.find((item) => item.id === id);
-
             return prevItem.filter((item) => item.id !== id);
-        }
-        );
+        });
     };
 
     const incrementQuantity = (id: number) => {
@@ -95,6 +81,7 @@ function CartProviders({ children }: CartProviderProps) {
             )
         );
     };
+
     const decrementQuantity = (id: number) => {
         setCart((prevItem) => {
             const existingItem = prevItem.find((item) => item.id === id);
@@ -107,11 +94,12 @@ function CartProviders({ children }: CartProviderProps) {
         });
     };
 
-
     const clearCart = () => {
         setCart([]);
         setTotalAmount(0)
-    }
+        console.log(totalAmount);
+    };
+
     return (
         <cartContext.Provider
             value={{
@@ -121,7 +109,7 @@ function CartProviders({ children }: CartProviderProps) {
                 removeOneFromCart,
                 incrementQuantity,
                 decrementQuantity,
-                clearCart
+                clearCart,
             }}
         >
             {children}
@@ -129,19 +117,15 @@ function CartProviders({ children }: CartProviderProps) {
     );
 }
 
-function useCart() {
+export function useCart() {
     const context = useContext(cartContext);
     if (!context) {
-        throw new Error("useCart must be used within a cartProvider");
+        throw new Error("useCart must be used within a CartProvider");
     }
-    console.log(context);
     return context;
 }
-export { cartContext, useCart };
-export type { Item };
+
+export { cartContext };
 export default CartProviders;
-
-
-
-
+export type { Item };
 

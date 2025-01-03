@@ -2,26 +2,23 @@
 import { PiShoppingCart } from "react-icons/pi";
 import { FaRegHeart } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
-import { Item, useCart } from "@/app/Context/CartContext";
+import { useCart } from "@/app/Context/CartContext";
 import Image from "next/image";
+import { Watch } from "@/app/_lib/data";
 
-// Assuming Watch type looks like this
-// interface Watch {
-//   id: number;
-//   name: string;
-//   price: number;
-//   description: string;
-//   image: string;
-// }
+interface Item extends Watch{
+  quantity:number
+}
 
 export default function ProductId({ params }: { params: { id: string } }) {
   const [product, setProduct] = useState<Item>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
- const {addToCart}=useCart()
+ const {addToCart}=useCart();
  function HandleCart (){
   if(product){
-    addToCart(product)
+    addToCart(product as Item)
+    alert(`${product.name} added to the cart`)
   }
  }
 
@@ -76,16 +73,22 @@ export default function ProductId({ params }: { params: { id: string } }) {
             src={product.image}
             alt={product.name}
             className="rounded-lg w-full h-auto object-cover mb-6"
+            height={200}
+            width={200}
           />
           <div className="flex gap-4">
             <Image
               src={product.image}
               alt="Thumbnail 1"
+              height={200}
+              width={200}
               className="w-20 h-20 rounded-lg object-cover cursor-pointer hover:ring-2 hover:ring-blue-600"
             />
             <Image
               src={product.image}
               alt="Thumbnail 2"
+              height={200}
+              width={200}
               className="w-20 h-20 rounded-lg object-cover cursor-pointer hover:ring-2 hover:ring-blue-600"
             />
           </div>

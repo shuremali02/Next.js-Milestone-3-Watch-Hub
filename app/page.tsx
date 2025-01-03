@@ -1,15 +1,13 @@
-import Navbar from "@/Components/Header/Header";
-import TopSec from "@/Components/Top/Top";
+import Herosection from "@/Components/Herosection/Herosection";
+import TopSelling from "@/Components/HomePageSec/TopSelling";
 
 
 export default function Home() {
   return (
     <div>
-  <TopSec/>
-  <Navbar/>
-  
-    </div>
- 
     
-  );
-}
+      <Herosection/>
+      <TopSelling/>
+
+    </div>
+)}

@@ -18,7 +18,10 @@ const ProductCard = ({ id, name, price, description, image }:ProductCardProps) =
         <Image
           src={image}
           alt={name}
+          height={200}
+          width={200}
           className="h-full w-full object-cover rounded-md"
+
         />
         <span className="absolute top-2 left-2 bg-green-500 text-white text-sm font-semibold px-3 py-1 rounded">
           New
@@ -28,7 +31,7 @@ const ProductCard = ({ id, name, price, description, image }:ProductCardProps) =
       {/* Product Details */}
       <div className="mt-4">
         <h2 className="text-lg font-semibold text-gray-800">{name}</h2>
-        <p className="text-gray-600 text-sm mt-1">{description}</p>
+        <p className="text-gray-600 text-sm mt-1">{description.slice(0,140)}</p>
         <div className="flex items-center justify-between mt-4">
           <span className="text-xl font-bold text-teal-600">${price}</span>
           <Link href={`/Product/${id}`}>
