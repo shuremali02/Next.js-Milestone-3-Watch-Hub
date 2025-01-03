@@ -1,7 +1,8 @@
 "use client";
 import { useCart ,} from '@/app/Context/CartContext';
 import Image from 'next/image';
-import React from 'react'
+import React from 'react';
+ import OrderPlaced from '@/Components/OrderDone/OrderDone';
 
 export default function Herosection() {
     const {cart, decrementQuantity,totalPrice, removeOneFromCart,clearCart, incrementQuantity} = useCart();
@@ -86,7 +87,7 @@ console.log("Cart Context Data:",  cart);
               </button>
               {/* Place Order Button */}
               <button
-                onClick={()=>{alert("order placed")}}
+                onClick={()=>window.location.href="/OrderPlaced"}
                 className="w-full px-4 py-2 bg-blue-500 text-white font-semibold rounded-md shadow hover:bg-blue-600"
               >
                 Place Order

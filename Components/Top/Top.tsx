@@ -1,31 +1,3 @@
-// "use client"
-// import Image from "next/image";
-// import { Input } from "../ui/input";
-// import { FaSearch } from "react-icons/fa";
-
-// export default function TopSec() {
-//   return (
-//     <div className='flex justify-between items-center bg-black text-white px-4 p-2'>
-//         <div>
-//             <Image src={"/images/Logo.svg"} alt={"Logo"} width={120}  height={17} className="bg-white"/>
-            
-//         </div>
-//         <div className="flex w-full max-w-[560px] rounded-full">
-
-//         <Input placeholder="search " type="text " onChange={(e)=>(
-//             e.target.value 
-//         )}  />
-//         <FaSearch/>
-     
-//         </div>
-//         <div>
-//             icons
-//         </div>
-
-
-//     </div>
-//   )
-// }
 "use client";
 import { TbTruckDelivery } from "react-icons/tb";
 import { PiShoppingCartBold } from "react-icons/pi";
@@ -59,7 +31,7 @@ export default function TopSec() {
       {/* Icons Section */}
       <div className="flex gap-4">
         <TbTruckDelivery size={36}/>
-        <Link href={"/TestRoute"}>
+        <Link href={"/Cart"}>
       <PiShoppingCartBold size={32}/>
       </Link>
       </div>
