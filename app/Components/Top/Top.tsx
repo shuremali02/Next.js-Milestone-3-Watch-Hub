@@ -3,7 +3,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { PiShoppingCartBold } from "react-icons/pi";
 
 import Image from "next/image";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
 import { FaSearch } from "react-icons/fa";
 import Link from "next/link";
 

@@ -1,5 +1,4 @@
-import OrderPlaced from '@/Components/OrderDone/OrderDone'
-import React from 'react'
+import OrderPlaced from "@/app/Components/OrderDone/OrderDone";
 
 export default function Order() {
   return (
