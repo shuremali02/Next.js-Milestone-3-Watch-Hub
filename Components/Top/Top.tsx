@@ -12,7 +12,9 @@ export default function TopSec() {
     <div className="flex justify-between items-center bg-black text-white px-9 p-2">
       {/* Logo Section */}
       <div>
+        <Link href={"/"}>
         <Image src={"/images/Logo.jpeg"} alt={"Logo"} width={70} height={10} className="bg-white rounded-full" />
+        </Link>
       </div>
 
       {/* Search Bar with Icon */}

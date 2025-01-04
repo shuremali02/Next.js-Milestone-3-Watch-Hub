@@ -2,7 +2,7 @@
 import { useCart ,} from '@/app/Context/CartContext';
 import Image from 'next/image';
 import React from 'react';
- import OrderPlaced from '@/Components/OrderDone/OrderDone';
+
 
 export default function Herosection() {
     const {cart, decrementQuantity,totalPrice, removeOneFromCart,clearCart, incrementQuantity} = useCart();
