@@ -32,7 +32,9 @@ export default function TopSec() {
 
       {/* Icons Section */}
       <div className="flex gap-4">
+        <Link href={"/OrderDone"}>
         <TbTruckDelivery size={36}/>
+        </Link>
         <Link href={"/Cart"}>
       <PiShoppingCartBold size={32}/>
       </Link>
